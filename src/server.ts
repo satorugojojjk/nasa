@@ -1,16 +1,19 @@
 import { createServer } from "node:http";
 
-const port = 3000;
+import { handleRequest } from "./app.js";
+
+const port = Number(process.env.PORT ?? 3000);
+
+if (!Number.isInteger(port) || port < 1 || port > 65_535) {
+  throw new Error("PORT must be an integer between 1 and 65535");
+}
 
 const server = createServer((request, response) => {
-  if (request.method === "GET" && request.url === "/health") {
-    response.writeHead(200, { "Content-Type": "application/json" });
-    response.end(JSON.stringify({ status: "ok" }));
-    return;
-  }
+  const url = new URL(request.url ?? "/", "http://localhost");
+  const result = handleRequest(request.method, url.pathname);
 
-  response.writeHead(404, { "Content-Type": "application/json" });
-  response.end(JSON.stringify({ error: "Not found" }));
+  response.writeHead(result.statusCode, { "Content-Type": "application/json" });
+  response.end(JSON.stringify(result.body));
 });
 
 server.listen(port, () => {

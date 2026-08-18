@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
+    "fetch:iss": "tsx src/scripts/fetch-iss.ts",
     "start": "node dist/server.js",
+    "test": "npm run build && node --test dist/app.test.js dist/clients/celestrak.test.js",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

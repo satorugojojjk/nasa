@@ -2,16 +2,16 @@ const ISS_ORBIT_URL =
   "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=JSON";
 
 export type SatelliteOrbit = {
-  catalogId: number;
-  name: string;
-  epoch: string;
-  meanMotion: number;
-  eccentricity: number;
-  inclination: number;
-  rightAscensionOfAscendingNode: number;
-  argumentOfPericenter: number;
-  meanAnomaly: number;
-  bstar: number;
+  readonly catalogId: number;
+  readonly name: string;
+  readonly epoch: string;
+  readonly meanMotion: number;
+  readonly eccentricity: number;
+  readonly inclination: number;
+  readonly rightAscensionOfAscendingNode: number;
+  readonly argumentOfPericenter: number;
+  readonly meanAnomaly: number;
+  readonly bstar: number;
 };
 
 type HttpResponse = {
